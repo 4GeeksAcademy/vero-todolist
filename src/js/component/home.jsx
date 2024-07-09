@@ -12,8 +12,7 @@ const Home = () => {
 		if (tarea.trim() !== "") {
 			const nuevaLista = {
 				id: tarea.length + 1,
-				texto: tarea,
-				completada: false
+				texto: tarea
 			};
 
 			setLista([...lista, nuevaLista]);
@@ -34,18 +33,19 @@ const Home = () => {
 				<div className="d-flex">
 					<input type="text" id="inputValue" className="form-control fs-3" value={tarea} onChange={(e) => setTarea(e.target.value)} onKeyDown={(e) => e.key == "Enter" && agregarTarea()} />
 					<button type="button" className="btn btn-primary" onClick={agregarTarea}>Agrgar a la lista</button>
-
+				</div>
+				<div className="card fs-3 text-start">
+					<ul className="list-group list-group-flush">
+						{lista.map(item => (
+							<li className="list-group-item" key={item.id}>
+								<span >{item.texto}</span>
+								<button className="btn btn-ligth float-end" onClick={() => eliminarTarea(item.id)}>x</button>
+							</li>
+						))}
+					</ul>
 				</div>
 				<div id="passwordHelpBlock" className="form-text">
 					<ul>
-						{lista.map(item => (
-							<li key={item.id}>
-								<span >{item.texto}</span>
-								<button className="btn btn-ligth" onClick={() => eliminarTarea(item.id)}>x</button>
-
-							</li>
-						))}
-
 
 					</ul>
 				</div>
